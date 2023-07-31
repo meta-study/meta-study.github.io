@@ -1,12 +1,7 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang=""> <!--<![endif]-->
-
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="엠에스아카데미(주)는 IT와 프로그램 개발, 평생교육, 출판사를 통해 혁신적인 가치를 제공하고 고객의 성공을 위해 전문가 교육과 지식 공유를 추구하며, 현대 사회에서 필요한 기술과 지식을 제공합니다.
   우리는 고객의 가치를 중심으로 최선을 다해 지속적인 성장을 돕는 파트너가 되겠습니다.">
@@ -25,21 +20,22 @@
   <link rel="stylesheet" href="css/bootstrap-grid.rtl.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 </head>
 
 <body>
   <section class="banner" role="banner">
     <header id="header">
       <div class="header-content">
-        <h1>엠에스아카데미(주)</h1>
+        <h1 onclick="location.replace('/')">엠에스아카데미(주)</h1>
         <div>
           <nav>
             <ul>
               <li>
-                <a href="#overview">COMPANY</a>
+                <a id="scrollCompany" style="cursor: pointer; text-decoration: none;">COMPANY</a>
               </li>
               <li>
-                <a href="#about">BUSINESS</a>
+                <a id="scrollBusiness" style="cursor: pointer; text-decoration: none;">BUSINESS</a>
               </li>
             </ul>
           </nav>
@@ -62,7 +58,7 @@
     </div>
   </section>
 
-  <section class="company">
+  <section class="company" id="company">
     <div class="container">
       <h1>COMPANY</h1>
       <h3>
@@ -106,14 +102,14 @@
       </ul>
     </div>
   </section>
-  <!-- dynamic section -->
-  <section class="dynamic">
+  
+  <section class="dynamic" id="business">
     <div class="container">
       <div>
         <h1>IT & 프로그래밍</h1>
         <p>엠에스아카데미는 연구개발을 통해 최신 기술을 활용하여 클라이언트 맞춤형 서비스를 제공합니다.</p>
       </div>
-      <!-- dynamic -->
+      
       <div class="swiper mySwiper" pagination="true" pagination-clickable="true" slides-per-view="3" centered-slides="true" space-between="30" grab-cursor="true">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -467,14 +463,15 @@
     </div>
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
     function initSwiper() {
       var screenWidth = window.innerWidth;
       var slidesPerViewValue = screenWidth <= 767 ? 2 : 3;
 
-      if (window.mySwiper) {
-        window.mySwiper.destroy();
+      if (window.mySwiper && Array.isArray(window.mySwiper)) {
+        window.mySwiper.forEach(function (item) {
+          item.destroy();
+        });
       }
 
       window.mySwiper = new Swiper(".mySwiper", {
@@ -711,6 +708,18 @@
       applyEffectOnMobile();
 
       window.addEventListener("resize", applyEffectOnMobile);
+
+      $("#scrollCompany").click(function() {
+        $('html, body').animate({
+          scrollTop: $("#company").offset().top - $("#header").height()
+        }, 1000);
+      });
+
+      $("#scrollBusiness").click(function() {
+        $('html, body').animate({
+          scrollTop: $("#business").offset().top - $("#header").height() + 1
+        }, 1000);
+      });
     });
   </script>
   <section>
@@ -755,10 +764,8 @@
     </div>
   </section>
   
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.fancybox.pack.js"></script>
   <script src="js/retina.min.js"></script>
@@ -767,6 +774,5 @@
   <script src="js/jquery.subscribe.js"></script>
   <script src="js/jquery.contact.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/swiper.min.js"></script>
 </body>
 </html>
