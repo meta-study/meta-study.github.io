@@ -75,3 +75,23 @@ $(document).ready(function() {
         }); 
     });
 });
+
+function chatChannel() {
+	if (Kakao.isInitialized()) {
+		Kakao.Channel.chat({
+			channelPublicId: '_xaUqtK'
+		});
+	} else {
+		window.open('https://pf.kakao.com/_xaUqtK/chat', '_blank');
+	}
+}
+
+function addChannel() {
+	if (Kakao.isInitialized()) {
+		Kakao.Channel.addChannel({
+			channelPublicId: '_xaUqtK'
+		});
+	} else {
+		window.open('https://pf.kakao.com/_xaUqtK', '_blank');
+	}
+}
